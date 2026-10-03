@@ -90,7 +90,7 @@ export const GraphCanvas = ({ graph, selectedId, onSelect, onPivot, loading }) =
           zoomable
           nodeColor={(n) => (n.data?.role === "target" ? "#ef4444" : MINI_COLOR[n.type])}
           maskColor="rgba(7,7,8,0.75)"
-          style={{ background: "#0d0d10", border: "1px solid rgba(255,255,255,0.08)" }}
+          style={{ background: "#0d0d10", border: "1px solid rgba(255,255,255,0.08)", width: 160, height: 100 }}
         />
       </ReactFlow>
     </div>

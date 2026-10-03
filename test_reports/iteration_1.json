@@ -1,0 +1,20 @@
+{
+  "summary": "First-run comprehensive testing of Open-EDR Graph Engine MVP. Backend pytest suite (10 tests) and Playwright UI flow both passed 100%. Verified golden-case Sysmon reconstruction: powershell target produces 15 nodes/15 edges, correct ancestors (explorer->WINWORD->cmd, depth 3), descendants (curl, malware, rundll32, whoami), expected network/file artifacts, MITRE T1059.001 badges and base64-decoded command. Chrome and svchost benign subtrees are correctly excluded from the powershell investigation. Time-window filter, unknown-guid 404, explorer/svchost graphs, investigations CRUD, and search by image/PID all behave as specified. UI: canvas renders target highlighted, inspector opens with PID/decoded/MITRE on load; clicking process/network/file nodes updates inspector; close empties it; suggested target creates investigation (recent-investigation-0); search 'rundll' -> search-result-2216 rebuilds graph around rundll32; invalid GUID shows toast + status-error; layout TB/LR toggles work.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/test_graph_api.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py uses deprecated FastAPI @app.on_event('startup'/'shutdown'); should migrate to lifespan context manager (non-blocking, but will break in future FastAPI).",
+    "GET /api/graph/{guid} does not persist an investigation but the frontend treats initial load through this path; by design per spec, kept as-is.",
+    "shuffled_events() uses random.Random(7) so order is deterministic — good for reproducibility; make sure production ingest preserves true out-of-order behavior.",
+    "No pagination/limit on /api/investigations beyond .to_list(20); fine for MVP."
+  ],
+  "updated_files": ["/app/backend/tests/test_graph_api.py", "/app/test_reports/iteration_1.json"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "N/A - no auth",
+  "seed_data_creation": "Backend auto-seeds 22 Sysmon events (golden phishing-macro chain) on startup if sysmon_events empty. No manual seeding required. One investigation was created during tests (powershell target) and persisted.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend tests live at /app/backend/tests/test_graph_api.py and cover summary, graph (powershell/explorer/svchost), time-window, 404s, investigations POST/GET, search. Reuse PS_GUID={6a1f3c2e-2c42-6668-0c01-000000002a00}. Each investigation POST writes a doc; collection grows across runs — tests only assert newest-first, not exact count. Do not drop sysmon_events; seeding only runs if empty."
+}
