@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import "@/App.css";
-import { Network } from "lucide-react";
 import { Toaster, toast } from "@/components/ui/sonner";
 import { api, fmtTime } from "@/lib/api";
 import { GraphCanvas } from "@/components/graph/GraphCanvas";
@@ -11,9 +10,12 @@ import { SearchBar } from "@/components/SearchBar";
 const Header = ({ summary, onPick }) => (
   <header data-testid="app-header" className="h-14 shrink-0 border-b border-white/10 flex items-center justify-between px-4 bg-neutral-950/95 backdrop-blur-xl z-50">
     <div className="flex items-center gap-3">
-      <div className="w-8 h-8 border border-cyan-400/60 flex items-center justify-center bg-cyan-400/10">
-        <Network className="w-4 h-4 text-cyan-300" />
-      </div>
+      <img
+        data-testid="app-logo"
+        src={`${process.env.PUBLIC_URL}/logo.png`}
+        alt="Open-EDR Graph Engine"
+        className="w-10 h-10 object-contain drop-shadow-[0_0_10px_rgba(34,211,238,0.35)]"
+      />
       <div>
         <h1 data-testid="app-title" className="font-heading text-base font-bold tracking-tight leading-none">
           Open-EDR <span className="text-cyan-300">Graph Engine</span>
