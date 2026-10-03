@@ -1,0 +1,98 @@
+{
+  "theme": "dark",
+  "typography": {
+    "font_families": {
+      "heading": "IBM Plex Mono, monospace",
+      "body": "IBM Plex Sans, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "hierarchy": {
+      "h1": "text-2xl font-bold tracking-tight",
+      "h2": "text-xl font-semibold tracking-tight",
+      "h3": "text-lg font-medium",
+      "overline": "text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground",
+      "body": "text-sm text-foreground",
+      "small": "text-xs text-muted-foreground",
+      "data": "text-sm font-mono text-foreground"
+    },
+    "guidelines": "Banned: Inter, Roboto. Use IBM Plex Mono for headings and data labels to establish a technical, SOC-analyst aesthetic. Apply tracking-tight to headings and tracking-[0.2em] to overlines."
+  },
+  "colors": {
+    "archetype": "Archetype 4 (Swiss & High-Contrast) + Retro-Futurism",
+    "background": "Deepest Void Black (bg-neutral-950 or hsl(240, 10%, 4%))",
+    "foreground": "Pure White (hsl(0, 0%, 98%)) for maximum contrast",
+    "accents": {
+      "malware_alert": "Signal Red (text-red-500, border-red-500)",
+      "network": "Cyan/Volt Blue (text-cyan-400, border-cyan-400)",
+      "file": "Cyber Yellow/Amber (text-amber-400, border-amber-400)",
+      "process_standard": "Matrix Green or Slate (text-emerald-400 or text-slate-300)"
+    },
+    "guidelines": "Force Dark Mode globally. Never use pure white backgrounds. Tint neutral greys with blue (slate). Use high contrast for text. Ensure APCA compliance."
+  },
+  "visual_enhancers": {
+    "surfaces": "Grid Borders and Terminal Look. Use 1px solid borders (border-border/40) for panels. Remove soft shadows. Use backdrop-blur for floating elements. Never use transparent backgrounds on elements that overlap content.",
+    "textures": "Subtle scanlines or grid backgrounds (React Flow Background variant='dots' or 'lines') for the canvas to simulate a technical terminal.",
+    "borders": "Sharp edges (rounded-none or rounded-sm max 2px). The UI should feel rigid, precise, and objective."
+  },
+  "layouts": {
+    "strategy": "High Density Grid (For Dashboards/Analytics). Every pixel utilized.",
+    "structure": {
+      "app_container": "h-screen w-screen flex flex-col overflow-hidden bg-background text-foreground",
+      "header": "h-14 border-b border-border/40 flex items-center px-4 justify-between bg-background/95 backdrop-blur-xl z-50 shrink-0",
+      "main": "flex-1 flex overflow-hidden",
+      "canvas_area": "flex-1 relative bg-background",
+      "inspector_panel": "w-[400px] border-l border-border/40 bg-background/95 backdrop-blur shrink-0 overflow-y-auto flex flex-col p-4 gap-6"
+    }
+  },
+  "components": {
+    "react_flow_nodes": {
+      "style": "Rectangular, rigid, 1px border. Background should be solid deep grey/black (bg-neutral-900). Border color indicates entity type (Red=Malware, Cyan=Network). Add a left border accent (4px thick) to denote type visually. DO NOT use generic rounded cards.",
+      "typography": "Process name in text-sm font-bold, PID in text-xs font-mono text-muted-foreground."
+    },
+    "inspector_panel": {
+      "style": "Dense key-value pairs. Key uses overline typography. Value uses monospace or standard body.",
+      "spacing": "gap-4 for sections, flex col gap-1 for key-value groups."
+    },
+    "search_bar": {
+      "style": "Use Shadcn Input. Customization: bg-neutral-900 border-border/40 focus-visible:ring-1 focus-visible:ring-cyan-500 rounded-none. Add search icon (Phosphor/Lucide)."
+    },
+    "badges": {
+      "style": "Sharp corners, 1px border, transparent background or 10% opacity of accent color. E.g., MITRE ATT&CK tags."
+    }
+  },
+  "motion": {
+    "guidelines": "Minimalist. Use micro-interactions for feedback. Hover states on interactive elements should be crisp (e.g., background color change, text color change). React Flow nodes can have a subtle scale on hover or click.",
+    "transitions": "Do NOT use `transition-all`. Use explicit `transition-colors duration-200 ease-in-out` or `transition-transform`."
+  },
+  "accessibility": {
+    "guidelines": "Ensure high contrast for text over dark backgrounds. Use data-testid attributes on all interactive elements (e.g., data-testid='search-input', data-testid='node-explorer-exe'). Support prefers-reduced-motion."
+  },
+  "media": {
+    "icons_library": "lucide-react (default) or @phosphor-icons/react. Recommend sharp, technical icons.",
+    "image_urls": {}
+  },
+  "3d_libraries": {
+    "usage": "Not recommended for this specific MVP, stick to React Flow and Dagre for 2D process graphs."
+  },
+  "instructions_to_main_agent": [
+    "Force Dark Mode in tailwind and index.css.",
+    "Use React Flow with dagre for top-down or left-right auto-layout of the process tree.",
+    "Create custom node types in React Flow: 'process', 'network', 'file', 'target-highlight'.",
+    "In the Inspector Panel, display details based on the selected node.",
+    "Implement a mock data graph of explorer.exe -> winword.exe -> cmd.exe -> malware.exe (with connections to IP and File).",
+    "DO NOT use generic centered App layouts. Remove default App.css styles that center text.",
+    "Follow 'Grid Borders' surface strategy: exposed skeletons, thin borders, no fluffy shadows.",
+    "Ensure all interactive components and key text fields have data-testid attributes."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Avoid this.",
+    "DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "You MUST NOT apply universal transition (e.g., transition: all).",
+    "You MUST NOT center align the app container.",
+    "Use appropriate generous padding inside panels, but maintain high density for data grids.",
+    "Every interaction needs micro-animations - hover states, etc.",
+    "Always include data-testid on interactive elements."
+  ]
+}

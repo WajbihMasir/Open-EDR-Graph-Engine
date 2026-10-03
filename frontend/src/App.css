@@ -1,0 +1,28 @@
+.edr-target {
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.9), 0 0 28px rgba(239, 68, 68, 0.35);
+}
+
+@keyframes edr-slide {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.edr-slide-in { animation: edr-slide 220ms ease-out; }
+
+.react-flow__controls {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none !important;
+}
+.react-flow__controls-button {
+  background: #0d0d10 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  fill: #a3a3a3 !important;
+  color: #a3a3a3 !important;
+  border-radius: 0 !important;
+}
+.react-flow__controls-button:hover { background: #18181d !important; }
+.react-flow__node { border-radius: 0; }
+.react-flow { --xy-background-color: #070708; }
+
+@media (prefers-reduced-motion: reduce) {
+  .edr-slide-in, .animate-pulse, .animate-spin { animation: none; }
+}
