@@ -8,21 +8,16 @@ import { Sidebar } from "@/components/Sidebar";
 import { SearchBar } from "@/components/SearchBar";
 
 const Header = ({ summary, onPick }) => (
-  <header data-testid="app-header" className="h-14 shrink-0 border-b border-white/10 flex items-center justify-between px-4 bg-neutral-950/95 backdrop-blur-xl z-50">
-    <div className="flex items-center gap-3">
+  <header data-testid="app-header" className="h-16 shrink-0 border-b border-white/10 flex items-center justify-between px-4 bg-neutral-950/95 backdrop-blur-xl z-50">
+    <h1 data-testid="app-title" className="flex items-center">
+      <span className="sr-only">Open-EDR Graph Engine</span>
       <img
         data-testid="app-logo"
-        src={`${process.env.PUBLIC_URL}/logo.png`}
+        src={`${process.env.PUBLIC_URL}/logo-wordmark.png`}
         alt="Open-EDR Graph Engine"
-        className="w-10 h-10 object-contain drop-shadow-[0_0_10px_rgba(34,211,238,0.35)]"
+        className="h-14 w-auto object-contain mix-blend-screen"
       />
-      <div>
-        <h1 data-testid="app-title" className="font-heading text-base font-bold tracking-tight leading-none">
-          Open-EDR <span className="text-cyan-300">Graph Engine</span>
-        </h1>
-        <div className="text-[10px] font-mono text-neutral-500 mt-1 tracking-[0.15em] uppercase">Sysmon → DAG · Wazuh / OpenSearch</div>
-      </div>
-    </div>
+    </h1>
     <SearchBar onPick={onPick} />
     <div data-testid="telemetry-status" className="flex items-center gap-4 font-mono text-[11px] text-neutral-400">
       {summary && ["1", "3", "11"].map((id) => (
